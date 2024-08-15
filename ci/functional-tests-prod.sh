@@ -7,7 +7,9 @@ frontend_url="https://$host"
 echo "url: $frontend_url"
 
 echo "Testing frontend availability..."
-if curl -s --head --request GET $frontend_url | grep "200 OK" > /dev/null; then
+curl_output=$(curl -s -o /dev/null -w "%{http_code}" $frontend_url)
+echo "HTTP status code for frontend URL: $curl_output"
+if [ "$curl_output" -eq 200 ]; then
     echo "Frontend is reachable."
 else
     echo "Error: Frontend is not reachable!"
@@ -15,7 +17,9 @@ else
 fi
 
 echo "Testing all endpoint..."
-if curl -s --head --request GET $frontend_url/api/all | grep "200 OK" > /dev/null; then
+curl_output=$(curl -s -o /dev/null -w "%{http_code}" $frontend_url/api/all)
+echo "HTTP status code for all endpoint: $curl_output"
+if [ "$curl_output" -eq 200 ]; then
     echo "Can fetch all cookies"
 else
     echo "Error: Can't fetch cookies!"
@@ -23,7 +27,9 @@ else
 fi
 
 echo "Testing random endpoint..."
-if curl -s --head --request GET $frontend_url/api/random | grep "200 OK" > /dev/null; then
+curl_output=$(curl -s -o /dev/null -w "%{http_code}" $frontend_url/api/random)
+echo "HTTP status code for random endpoint: $curl_output"
+if [ "$curl_output" -eq 200 ]; then
     echo "Can fetch random cookies"
 else
     echo "Error: Can't fetch random cookies"
