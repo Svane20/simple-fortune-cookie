@@ -1,0 +1,26 @@
+name: Deploy Prod
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      - name: Set Kube config data
+        run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+      - name: Deploy frontend, backend and Redis
+        run: kubectl --kubeconfig kubeconfig apply -f kubernetes/
+      - name: Wait for deployment
+        run: kubectl --kubeconfig kubeconfig rollout status deployment
+      - name: Run Functional tests
+        run: chmod +x ci/functional-tests-prod.sh && ci/functional-tests-prod.sh
