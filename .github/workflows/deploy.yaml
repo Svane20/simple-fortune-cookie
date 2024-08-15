@@ -16,8 +16,6 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
-      - name: List directory
-        run: ls -l kubernetes
       - name: Set Kube config data
         run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
       - name: Print Kube config data
