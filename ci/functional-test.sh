@@ -2,9 +2,9 @@
 node_ip = NODE_EXTERNAL_IP=$(kubectl --kubeconfig kubeconfig get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
 frontend_port = $(kubectl --kubeconfig kubeconfig get service frontend -o jsonpath='{.spec.ports[0].nodePort}')
 
-frontend_url = "http://$NODE_EXTERNAL_IP:$FRONTEND_NODE_PORT"
+frontend_url = "http://$node_ip:$frontend_port"
 
-echo "$frontend_url"
+echo "url: $frontend_url"
 
 echo "Testing frontend availability..."
 if curl -s --head --request GET $frontend_url | grep "200 OK" > /dev/null; then 
