@@ -2,6 +2,6 @@
 backend/backend.exe
 
 # frontend binary
-frontend/frontend.ext
+frontend/frontend.exe
 
 .idea/
