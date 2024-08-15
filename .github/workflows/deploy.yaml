@@ -20,3 +20,7 @@ jobs:
         run: echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
       - name: List kubernetes directory
         run: ls -l kubernetes
+      - name: Deploy frontend and backend
+        run: kubectl --kubeconfig kubeconfig apply -f kubernetes/
+      - name: Wait for deployment
+        run: kubectl --kubeconfig kubeconfig rollout status deployment
