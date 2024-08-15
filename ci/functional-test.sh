@@ -17,3 +17,19 @@ else
     exit 1
 fi
 
+echo "Testing all endpoint..."
+if curl -s --head --request GET $frontend_url/api/all | grep "200 OK" > /dev/null; then 
+    echo "Can fetch all cookies"
+else 
+    echo "Error: Can't fetch cookies!"
+    exit 1
+fi
+
+echo "Testing random endpoint..."
+if curl -s --head --request GET $frontend_url/api/random | grep "200 OK" > /dev/null; then 
+    echo "Can fetch random cookies"
+else 
+    echo "Error: Can't fetch random cookies"
+    exit 1
+fi
+
