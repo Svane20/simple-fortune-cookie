@@ -27,3 +27,5 @@ jobs:
           kubectl --kubeconfig kubeconfig apply -f kubernetes/redis-deployment.yaml
       - name: Wait for deployment
         run: kubectl --kubeconfig kubeconfig rollout status deployment
+      - name: Run Functional tests
+        run: chmod +x ci/functional-test.sh && ci/functional-test.sh
