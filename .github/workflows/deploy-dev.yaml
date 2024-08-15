@@ -28,4 +28,4 @@ jobs:
     needs: [ deploy ]
     steps:
       - name: functional tests
-        run: chmod +x ci/functional-tests.sh && ci/functional-tests.sh
+        run: chmod +x ci/functional-test.sh && ci/functional-test.sh
