@@ -1,0 +1,31 @@
+# Binaries
+main
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Temporary files and directories
+*.log
+*.tmp
+*.temp
+*.out
+
+# Dependency directories
+vendor/
+
+# Git repository files
+.git
+.gitignore
+.gitattributes
+
+# Editor and IDE files
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker-related files
+Dockerfile
