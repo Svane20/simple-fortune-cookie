@@ -50,11 +50,11 @@ metadata:
   name: frontend-ingress
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 spec:
-  ingressClassName: alb
   rules:
-    - host: fortune-workstation-78.sdu.eficode.academy.eficode.academy
+    - host: quotes-workstation-78.sdu.eficode.academy.eficode.academy
       http:
         paths:
           - pathType: Prefix
