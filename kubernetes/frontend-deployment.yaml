@@ -54,7 +54,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 spec:
   rules:
-    - host: quotes-workstation-78.sdu.eficode.academy.eficode.academy
+    - host: fortune.sdu.eficode.academy.eficode.academy
       http:
         paths:
           - pathType: Prefix
