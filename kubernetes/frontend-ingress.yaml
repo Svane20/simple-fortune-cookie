@@ -8,7 +8,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 spec:
   rules:
-    - host: simple-fortune-cookie.sdu.eficode.academy
+    - host: fortune-cookie.sdu.eficode.academy
       http:
         paths:
           - pathType: Prefix
