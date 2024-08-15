@@ -17,6 +17,7 @@ spec:
       containers:
       - name: frontend
         image: ghcr.io/svane20/simple-fortune-cookie-frontend:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
