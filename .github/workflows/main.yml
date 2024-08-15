@@ -46,16 +46,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # Transform GitHub.actor to lowercase
-      - name: Transform username to lowercase
-        run: echo "OWNER_LOWER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      - name: Build and push Docker image
+      - name: Set environment variables
         run: |
-          docker build -t ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-frontend:1.0-${{ github.sha }} \
-                        -t ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-frontend:latest \
-                        -f ./frontend/Dockerfile ./frontend
-          docker push ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-frontend:1.0-${{ github.sha }}
-          docker push ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-frontend:latest
+          echo "OWNER_LOWER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "GITHUB_SHA=${{ github.sha }}" >> $GITHUB_ENV
+      - name: Build and push Docker image
+        run: chmod +x ci/build-push-frontend-docker-image.sh && ci/build-push-frontend-docker-image.sh
 
 
   build_backend:
@@ -96,13 +92,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # Transform GitHub.actor to lowercase
-      - name: Transform username to lowercase
-        run: echo "OWNER_LOWER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      - name: Build and push Docker image
+      - name: Set environment variables
         run: |
-          docker build -t ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-backend:1.0-${{ github.sha }} \
-                        -t ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-backend:latest \
-                        -f ./backend/Dockerfile ./backend
-          docker push ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-backend:1.0-${{ github.sha }}
-          docker push ghcr.io/${{ env.OWNER_LOWER }}/simple-fortune-cookie-backend:latest
+          echo "OWNER_LOWER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+          echo "GITHUB_SHA=${{ github.sha }}" >> $GITHUB_ENV
+      - name: Build and push Docker image
+        run: chmod +x ci/build-push-backend-docker-image.sh && ci/build-push-backend-docker-image.sh
