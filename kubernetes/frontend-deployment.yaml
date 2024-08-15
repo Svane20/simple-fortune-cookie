@@ -23,11 +23,9 @@ spec:
             cpu: "500m"
         ports:
           - containerPort: 8080
-        env:
-          - name: BACKEND_DNS
-            value: backend-service
-          - name: BACKEND_PORT
-            value: "9000"
+        envFrom:
+          - configMapRef:
+              name: frontend-config
 
 ---
 apiVersion: v1
