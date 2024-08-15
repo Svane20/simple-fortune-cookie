@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/rs/cors"
 	"math/rand"
 	"net/http"
 	"regexp"
 	"sync"
+
+	"github.com/rs/cors"
 )
 
 var (
