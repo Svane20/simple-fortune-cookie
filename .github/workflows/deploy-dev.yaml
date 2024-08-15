@@ -18,8 +18,13 @@ jobs:
           kubeconfig: ${{ secrets.KUBECONFIG_DEV }}
       - name: Set Kube config data
         run: echo "${{ secrets.KUBECONFIG_DEV }}" | base64 -d > kubeconfig
-      - name: Deploy frontend, backend and Redis
-        run: kubectl --kubeconfig kubeconfig apply -f kubernetes/
+      - name: Deploy frontend, backend, and Redis
+        run: |
+          kubectl --kubeconfig kubeconfig apply -f kubernetes/backend-config.yaml
+          kubectl --kubeconfig kubeconfig apply -f kubernetes/backend-deployment.yaml
+          kubectl --kubeconfig kubeconfig apply -f kubernetes/frontend-config.yaml
+          kubectl --kubeconfig kubeconfig apply -f kubernetes/frontend-deployment.yaml
+          kubectl --kubeconfig kubeconfig apply -f kubernetes/redis-deployment.yaml
       - name: Wait for deployment
         run: kubectl --kubeconfig kubeconfig rollout status deployment
       - name: Run Functional tests
