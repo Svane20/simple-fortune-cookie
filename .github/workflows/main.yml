@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: frontend-artifact
-          path: ./frontend/frontend.exe
+          path: ./frontend/frontend_binary
 
   build_frontend_docker_image:
     runs-on: ubuntu-latest
