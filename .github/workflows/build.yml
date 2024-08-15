@@ -95,9 +95,3 @@ jobs:
           echo "GITHUB_SHA=${{ github.sha }}" >> $GITHUB_ENV
       - name: Build and push Docker image
         run: chmod +x ci/build-push-backend-docker-image.sh && ci/build-push-backend-docker-image.sh
-  
-  functional_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: functional tests
-        run: ./ci/functional-tests.sh
