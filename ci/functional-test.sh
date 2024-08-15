@@ -1,6 +1,6 @@
 #!/bin/bash
-node_ip = NODE_EXTERNAL_IP=$(kubectl --kubeconfig kubeconfig get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-frontend_port = $(kubectl --kubeconfig kubeconfig get service frontend -o jsonpath='{.spec.ports[0].nodePort}')
+node_ip=$(kubectl --kubeconfig kubeconfig get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
+frontend_port=$(kubectl --kubeconfig kubeconfig get service frontend -o jsonpath='{.spec.ports[0].nodePort}')
 
 echo "nodeip: $node_ip"
 echo "port: $frontend_port"
