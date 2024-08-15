@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/svane20/simple-fortune-cookie-frontend:1.0-fc3950ce4453ed3a9d3b210a4f83213be85ce06c
+        image: ghcr.io/svane20/simple-fortune-cookie-frontend:latest
         resources:
           limits:
             memory: "128Mi"

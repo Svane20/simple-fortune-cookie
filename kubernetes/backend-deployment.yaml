@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ghcr.io/svane20/simple-fortune-cookie-backend:1.0-e1d35a4f702ee03cdc9edba27aa5c7a6d9c1a64a
+        image: ghcr.io/svane20/simple-fortune-cookie-backend:latest
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
           - containerPort: 9000
-          
+
 ---
 apiVersion: v1
 kind: Service
