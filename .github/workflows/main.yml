@@ -1,0 +1,51 @@
+name: Go Build and Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build_and_test_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+      - name: Install frontend dependencies
+        run: go mod tidy
+        working-directory: ./frontend
+      - name: Run tests
+        run: go test -v ./...
+        working-directory: ./frontend
+      - name: Build frontend
+        run: go build -o frontend_binary
+        working-directory: ./frontend
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-artifact
+          path: ./frontend/frontend.exe
+
+  build_backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+      - name: Install backend dependencies
+        run: go mod tidy
+        working-directory: ./backend
+      - name: Build backend
+        run: go build -o backend_binary
+        working-directory: ./backend
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-artifact
+          path: ./backend/backend.exe
