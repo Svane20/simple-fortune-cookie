@@ -4,6 +4,8 @@ frontend_port = $(kubectl --kubeconfig kubeconfig get service frontend -o jsonpa
 
 frontend_url = "http://$NODE_EXTERNAL_IP:$FRONTEND_NODE_PORT"
 
+echo "$frontend_url"
+
 echo "Testing frontend availability..."
 if curl -s --head --request GET $frontend_url | grep "200 OK" > /dev/null; then 
     echo "Frontend is reachable."
