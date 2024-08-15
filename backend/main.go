@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/rs/cors"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -177,6 +178,14 @@ func main() {
 	mux.Handle("/fortunes", fortuneH)
 	mux.Handle("/fortunes/", fortuneH)
 
-	err := http.ListenAndServe(":9000", mux)
-    fmt.Println("%v", err)
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodOptions},
+		AllowedHeaders: []string{"*"},
+	})
+
+	handler := c.Handler(mux)
+
+	err := http.ListenAndServe(":9000", handler)
+	fmt.Printf("%v\n", err)
 }
