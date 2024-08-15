@@ -5,7 +5,7 @@ frontend_port=$(kubectl --kubeconfig kubeconfig get service frontend -o jsonpath
 echo "nodeip: $node_ip"
 echo "port: $frontend_port"
 
-frontend_url = "http://$node_ip:$frontend_port"
+frontend_url="http://$node_ip:$frontend_port"
 
 echo "url: $frontend_url"
 
